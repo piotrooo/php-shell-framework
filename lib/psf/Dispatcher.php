@@ -23,4 +23,9 @@ class Dispatcher
     {
 
     }
+
+    public function parseArgumnet()
+    {
+
+    }
 }
