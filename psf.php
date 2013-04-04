@@ -7,3 +7,4 @@ $loader
     ->setIncludePath('lib/')
     ->register();
 
+\Psf\Dispatcher::runScript($argv);

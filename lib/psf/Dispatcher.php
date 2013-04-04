@@ -8,7 +8,7 @@ namespace Psf;
 
 class Dispatcher 
 {
-    static public function runScript()
+    static public function runScript($argv)
     {
         $dispatcher = new Dispatcher();
         $dispatcher->dispatch();
