@@ -26,6 +26,6 @@ class Dispatcher
 
     public function parseArgumnet()
     {
-        echo 'parse';
+
     }
 }
