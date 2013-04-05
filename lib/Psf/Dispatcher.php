@@ -6,26 +6,23 @@
  */
 namespace Psf;
 
-class Dispatcher 
+class Dispatcher
 {
+    private $_userPassedArgv = array();
+
     static public function runScript($argv)
     {
-        $dispatcher = new Dispatcher();
+        $dispatcher = new Dispatcher($argv);
         $dispatcher->dispatch();
     }
 
-    public function __construct()
+    public function __construct($argv)
     {
-
+        $this->_userPassedArgv = $argv;
     }
 
     public function dispatch()
     {
-
-    }
-
-    public function parseArgumnet()
-    {
-
+        print_r($this->_userPassedArgv);
     }
 }
