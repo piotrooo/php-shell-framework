@@ -6,6 +6,8 @@
  */
 namespace Psf;
 
+use Psf\Input\ArgvInput;
+
 class Dispatcher
 {
     private $_userPassedArgv = array();
@@ -23,6 +25,16 @@ class Dispatcher
 
     public function dispatch()
     {
-        print_r($this->_userPassedArgv);
+        $this->parseInputArgv();
+
+        $executeShellScript = new \Console\HelloShell();
+        $executeShellScript->main();
+    }
+
+    public function parseInputArgv(array $argv = array())
+    {
+        $paramsToParse = (!empty($argv) ? $argv : $this->_userPassedArgv);
+
+        $argvParsed = new ArgvInput($paramsToParse);
     }
 }
