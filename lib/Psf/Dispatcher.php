@@ -2,7 +2,7 @@
 /**
  * Dispatcher
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Psf;
 
@@ -14,6 +14,7 @@ class Dispatcher
 
     static public function runScript($argv)
     {
+        print_r($argv);
         $dispatcher = new Dispatcher($argv);
         $dispatcher->dispatch();
     }
@@ -27,8 +28,8 @@ class Dispatcher
     {
         $this->parseInputArgv();
 
-        $executeShellScript = new \Console\HelloShell();
-        $executeShellScript->main();
+//        $executeShellScript = new \Console\HelloShell();
+//        $executeShellScript->main();
     }
 
     public function parseInputArgv(array $argv = array())
@@ -36,5 +37,8 @@ class Dispatcher
         $paramsToParse = (!empty($argv) ? $argv : $this->_userPassedArgv);
 
         $argvParsed = new ArgvInput($paramsToParse);
+        $argvParsed
+            ->parseParameters();
+//        $argvParsed->getParsedParameters();
     }
 }

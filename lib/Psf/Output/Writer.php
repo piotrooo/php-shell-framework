@@ -2,7 +2,7 @@
 /**
  * ShellWriter
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Psf\Output;
 

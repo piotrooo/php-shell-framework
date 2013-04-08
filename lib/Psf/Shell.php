@@ -2,7 +2,7 @@
 /**
  * Shell
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Psf;
 
@@ -17,7 +17,6 @@ class Shell
     public function __construct()
     {
         $this->_stdout = new Writer(Writer::STREAM_STDOUT);
-
         $this->_userDefinedInput = new DefinitionInput('hello');
     }
 
