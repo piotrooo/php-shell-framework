@@ -6,7 +6,7 @@
  */
 namespace Psf;
 
-use Psf\Input\ArgvInput;
+use Psf\Input\ArgvParser;
 
 class Dispatcher
 {
@@ -14,7 +14,6 @@ class Dispatcher
 
     static public function runScript($argv)
     {
-        print_r($argv);
         $dispatcher = new Dispatcher($argv);
         $dispatcher->dispatch();
     }
@@ -36,7 +35,7 @@ class Dispatcher
     {
         $paramsToParse = (!empty($argv) ? $argv : $this->_userPassedArgv);
 
-        $argvParsed = new ArgvInput($paramsToParse);
+        $argvParsed = new ArgvParser($paramsToParse);
         $argvParsed
             ->parseParameters();
 //        $argvParsed->getParsedParameters();

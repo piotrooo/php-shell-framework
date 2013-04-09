@@ -1,7 +1,7 @@
 <?php
-class ArgvInputTest extends PHPUnit_Framework_TestCase
+class ArgvParserTest extends PHPUnit_Framework_TestCase
 {
-    private $_mockedArgvInput;
+    private $_mockedArgvParser;
     private $_mockedConstructorParams;
 
     public function setUp()
@@ -21,7 +21,14 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
             'test1'
         );
 
-        $this->_mockedArgvInput = new \Psf\Input\ArgvInput($this->_mockedConstructorParams);
+        $this->_mockedArgvParser = new \Psf\Input\ArgvParser($this->_mockedConstructorParams);
+    }
+
+    private function _getValueForParameter($parameter)
+    {
+        $paramsReturned = $this->_mockedArgvParser->getParsedParameters();
+        $paramToCompare = isset($paramsReturned['hello'][$parameter]) ? $paramsReturned['hello'][$parameter] : ' ';
+        return $paramToCompare;
     }
 
     /**
@@ -30,12 +37,11 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseShortParametersWithoutValue()
     {
         //given
-        $this->_mockedArgvInput->parseParameters();
+        $this->_mockedArgvParser->parseParameters();
 
         //when
         $paramsExpected = '';
-        $paramsReturned = $this->_mockedArgvInput->getParsedParameters();
-        $paramToCompare = isset($paramsReturned['hello']['w']) ? $paramsReturned['hello']['w'] : ' ' ;
+        $paramToCompare = $this->_getValueForParameter('w');
 
         //then
         $this->assertEquals($paramsExpected, $paramToCompare);
@@ -47,12 +53,11 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseShortParametersWithValueSpaceSepared()
     {
         //given
-        $this->_mockedArgvInput->parseParameters();
+        $this->_mockedArgvParser->parseParameters();
 
         //when
         $paramsExpected = 'value1';
-        $paramsReturned = $this->_mockedArgvInput->gzetParsedParameters();
-        $paramToCompare = isset($paramsReturned['hello']['v']) ? $paramsReturned['hello']['v'] : '' ;
+        $paramToCompare = $this->_getValueForParameter('v');
 
         //then
         $this->assertEquals($paramsExpected, $paramToCompare);
@@ -64,12 +69,11 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseShortParametersWithValueNonSpaceSepared ()
     {
         //given
-        $this->_mockedArgvInput->parseParameters();
+        $this->_mockedArgvParser->parseParameters();
 
         //when
         $paramsExpected = 'value3';
-        $paramsReturned = $this->_mockedArgvInput->getParsedParameters();
-        $paramToCompare = isset($paramsReturned['hello']['c']) ? $paramsReturned['hello']['c'] : '' ;
+        $paramToCompare = $this->_getValueForParameter('c');
 
         //then
         $this->assertEquals($paramsExpected, $paramToCompare);
@@ -81,12 +85,11 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseShortParametersWithValueEqualSignSepared ()
     {
         //given
-        $this->_mockedArgvInput->parseParameters();
+        $this->_mockedArgvParser->parseParameters();
 
         //when
         $paramsExpected = 'value2';
-        $paramsReturned = $this->_mockedArgvInput->getParsedParameters();
-        $paramToCompare = isset($paramsReturned['hello']['s']) ? $paramsReturned['hello']['s'] : '' ;
+        $paramToCompare = $this->_getValueForParameter('s');
 
         //then
         $this->assertEquals($paramsExpected, $paramToCompare);
@@ -98,9 +101,14 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseLongParametersWithoutValue()
     {
         //given
+        $this->_mockedArgvParser->parseParameters();
 
         //when
+        $paramsExpected = '';
+        $paramToCompare = $this->_getValueForParameter('withoutval');
+
         //then
+        $this->assertEquals($paramsExpected, $paramToCompare);
     }
 
     /**
@@ -109,8 +117,13 @@ class ArgvInputTest extends PHPUnit_Framework_TestCase
     public function shouldParseLongParametersWithValue()
     {
         //given
+        $this->_mockedArgvParser->parseParameters();
 
         //when
+        $paramsExpected = 'value4';
+        $paramToCompare = $this->_getValueForParameter('name');
+
         //then
+        $this->assertEquals($paramsExpected, $paramToCompare);
     }
 }

@@ -9,7 +9,7 @@
  */
 namespace Psf\Input;
 
-class ArgvInput
+class ArgvParser
 {
     private $_userPassedParams;
     private $_parsedParametersList = array();
