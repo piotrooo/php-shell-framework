@@ -55,7 +55,7 @@ class Loader
             }
         }
 
-        throw new LoaderException("Couldn't load class file - non path found");
+        throw new LoaderException("Couldn't load class file - non path found [$classPath]");
     }
 }
 

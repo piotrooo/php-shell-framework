@@ -25,19 +25,29 @@ class Dispatcher
 
     public function dispatch()
     {
-        $this->parseInputArgv();
+        $parsedArgv = $this->getParseInputArgv();
 
-//        $executeShellScript = new \Console\HelloShell();
-//        $executeShellScript->main();
+        foreach ($parsedArgv as $applicationName => $applicationParameters) {
+            $this->_callAplication($applicationName, $applicationParameters);
+        }
     }
 
-    public function parseInputArgv(array $argv = array())
+    private function _callAplication($applicationName, $applicationParameters)
+    {
+        $preparedAplicationName = '\Console\\' . ucfirst($applicationName) . 'Shell';
+
+        $application = new $preparedAplicationName($applicationName, $applicationParameters);
+        $application->configure();
+        $application->main();
+    }
+
+    public function getParseInputArgv(array $argv = array())
     {
         $paramsToParse = (!empty($argv) ? $argv : $this->_userPassedArgv);
 
         $argvParsed = new ArgvParser($paramsToParse);
-        $argvParsed
-            ->parseParameters();
-//        $argvParsed->getParsedParameters();
+        $argvParsed->parseParameters();
+
+        return $argvParsed->getParsedParameters();
     }
 }
