@@ -27,6 +27,12 @@ class HelloShell extends Shell implements ShellApplicationInterface
         if (isset($name)) {
             $this->out($name);
         }
+
+        $this->out("Type how old are you: ", 0);
+        $age = $this->read();
+        if (!empty($age)) {
+            $this->out('You have ' . $age . ' years old - nice!');
+        }
     }
 
     private function _getParameterWrapper($parameterName)

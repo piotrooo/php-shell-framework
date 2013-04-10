@@ -8,6 +8,7 @@ namespace Psf;
 
 use Psf\Input\DefinedInput;
 use Psf\Input\DefinedInputException;
+use Psf\Input\Reader;
 use Psf\Output\Writer;
 
 class Shell
@@ -15,6 +16,7 @@ class Shell
     public $parsedArgv;
     private $_stdout;
     private $_stderr;
+    private $_stdin;
     private $_userDefinedInput = array();
     private $_applicationName;
 
@@ -25,6 +27,8 @@ class Shell
 
         $this->_stdout = new Writer(Writer::STREAM_STDOUT);
         $this->_stderr = new Writer(Writer::STREAM_STDERR);
+
+        $this->_stdin = new Reader(Reader::STREAM_READ);
     }
 
     public function out($message, $numberOfNewLines = 1, $verbosityLevel = Writer::VERBOSITY_NORMAL)
@@ -35,6 +39,13 @@ class Shell
     public function err($message, $numberOfNewLines = 1, $verbosityLevel = Writer::VERBOSITY_NORMAL)
     {
         $this->_stderr->writeMessage($message, $numberOfNewLines, $verbosityLevel);
+    }
+
+    public function read()
+    {
+        $readedValue = $this->_stdin->getReadedValue();
+
+        return $readedValue;
     }
 
     public function addParameter($shortName, $longName)
@@ -70,6 +81,7 @@ class Shell
                 return true;
             }
         }
+
         return false;
     }
 }
