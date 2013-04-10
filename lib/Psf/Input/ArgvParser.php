@@ -28,7 +28,7 @@ class ArgvParser
 
     public function parseParameters()
     {
-        foreach ($this->_userPassedParams as $key => $singleParameter) {
+        foreach ($this->_userPassedParams as $singleParameter) {
             $this->_detectParameterType($singleParameter);
         }
 

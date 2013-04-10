@@ -9,6 +9,7 @@ namespace Psf;
 use Psf\Input\DefinedInput;
 use Psf\Input\DefinedInputException;
 use Psf\Input\Reader;
+use Psf\Output\StyleFormatter;
 use Psf\Output\Writer;
 
 class Shell
@@ -41,11 +42,16 @@ class Shell
         $this->_stderr->writeMessage($message, $numberOfNewLines, $verbosityLevel);
     }
 
+    public function setFormatter($xmlTag, StyleFormatter $displayFormat)
+    {
+        $this->_stdout->setFormatter($xmlTag, $displayFormat);
+    }
+
     public function read()
     {
-        $readedValue = $this->_stdin->getReadedValue();
+        $readValue = $this->_stdin->getReadedValue();
 
-        return $readedValue;
+        return $readValue;
     }
 
     public function addParameter($shortName, $longName)
@@ -58,12 +64,12 @@ class Shell
         return $this;
     }
 
-    public function getParameterValue($parameterName)
+    public function getParameterValue()
     {
         $returnValue = null;
-        foreach ($this->parsedArgv as $singleNameParameter => $singlevalueParameter) {
+        foreach ($this->parsedArgv as $singleNameParameter => $singleValueParameter) {
             if ($this->_isParameterFitUserDefined($singleNameParameter)) {
-                $returnValue = $singlevalueParameter;
+                $returnValue = $singleValueParameter;
             }
         }
 
