@@ -41,6 +41,15 @@ class DefinedInput
 
         return false;
     }
+
+    public function getOppositeParameter($actualParameter)
+    {
+        if ($actualParameter == $this->_longName) {
+            return $this->_shortName;
+        } else {
+            return $this->_longName;
+        }
+    }
 }
 
 class DefinedInputException extends \Exception

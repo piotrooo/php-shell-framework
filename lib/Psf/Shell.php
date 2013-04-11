@@ -64,13 +64,14 @@ class Shell
         return $this;
     }
 
-    public function getParameterValue()
+    public function getParameterValue($parameterName)
     {
         $returnValue = null;
-        foreach ($this->parsedArgv as $singleNameParameter => $singleValueParameter) {
-            if ($this->_isParameterFitUserDefined($singleNameParameter)) {
-                $returnValue = $singleValueParameter;
-            }
+
+        if($this->_isParameterFitUserDefined($parameterName)){
+            $evaluateParameter = $this->_fitParametrName($parameterName);
+
+            $returnValue = $this->parsedArgv[$parameterName] ?: $this->parsedArgv[$evaluateParameter];
         }
 
         if ($returnValue === null) {
@@ -84,10 +85,20 @@ class Shell
     {
         foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
             if ($singleUserDefinedInput->isFitAnyParameter($parameterName)) {
+
                 return true;
             }
         }
 
         return false;
+    }
+
+    private function _fitParametrName($orginalParameter)
+    {
+        foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
+            if ($singleUserDefinedInput->isFitAnyParameter($orginalParameter)) {
+                return $singleUserDefinedInput->getOpositeParameter($orginalParameter);
+            }
+        }
     }
 }
