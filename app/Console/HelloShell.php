@@ -22,20 +22,17 @@ class HelloShell extends Shell implements ShellApplicationInterface
 
     public function main()
     {
-        $styleFormat = new StyleFormatter('gray', 'magenta');
+        $styleFormat = new StyleFormatter('gray', 'magenta', array('blink', 'underline'));
         $this->setFormatter('special', $styleFormat);
-        $styleFormat = new StyleFormatter('blue', 'white');
+        $styleFormat = new StyleFormatter('', 'white', array('bold'));
         $this->setFormatter('special2', $styleFormat);
 
-        $this->out("<special>Hello</special> <special2>World</special2> <special>Today</special>!!!");
+        $this->out("<special>Hello</special> <special2> World </special2> <special>Today</special>!!!");
 
         $name = $this->_getParameterWrapper('N');
         if (isset($name)) {
             $this->out($name);
         }
-
-        $user = $this->_getParameterWrapper('u');
-        $this->out($user);
 
         $this->out("Type how old are you: ", 0);
         $age = $this->read();

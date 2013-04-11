@@ -33,7 +33,7 @@ class StyleFormatter
     public static $effects = array(
         'defaults' => 0,
         'bold' => 1,
-        'underscore' => 4,
+        'underline' => 4,
         'blink' => 5,
         'reverse' => 7,
         'conceal' => 8
@@ -68,7 +68,10 @@ class StyleFormatter
     private function _replaceTagColors($text)
     {
         $colors = $this->_getBgColorCode($this->_bgColor) . ';' . $this->_getFgColorCode($this->_fgColor);
-        return sprintf("\033[%sm%s\033[0m", $colors, $text);
+        $effects = $this->_getParsedToStringEffects();
+        $effectsCodeString = $effects ? ';' . $effects : '';
+
+        return sprintf("\033[%sm%s\033[0m", $colors . $effectsCodeString, $text);
     }
 
     private function _getFgColorCode($color)
@@ -79,5 +82,24 @@ class StyleFormatter
     private function _getBgColorCode($color)
     {
         return self::$bgColors[$color];
+    }
+
+    private function _getParsedToStringEffects()
+    {
+        $effectCodeList = array();
+        if (!empty($this->_effects)) {
+            foreach ($this->_effects as $effectName) {
+                $effectCodeList[] = $this->_getEffectCode($effectName);
+            }
+        }
+
+        $effectString = implode(';', $effectCodeList);
+
+        return $effectString;
+    }
+
+    private function _getEffectCode($effect)
+    {
+        return self::$effects[$effect];
     }
 }

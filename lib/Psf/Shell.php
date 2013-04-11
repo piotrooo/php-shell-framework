@@ -97,7 +97,7 @@ class Shell
     {
         foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
             if ($singleUserDefinedInput->isFitAnyParameter($orginalParameter)) {
-                return $singleUserDefinedInput->getOpositeParameter($orginalParameter);
+                return $singleUserDefinedInput->getOppositeParameter($orginalParameter);
             }
         }
     }
