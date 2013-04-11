@@ -69,7 +69,7 @@ class Shell
         $returnValue = null;
 
         if($this->_isParameterFitUserDefined($parameterName)){
-            $evaluateParameter = $this->_fitParametrName($parameterName);
+            $evaluateParameter = $this->_fitParameterName($parameterName);
 
             $returnValue = $this->parsedArgv[$parameterName] ?: $this->parsedArgv[$evaluateParameter];
         }
@@ -93,7 +93,7 @@ class Shell
         return false;
     }
 
-    private function _fitParametrName($orginalParameter)
+    private function _fitParameterName($orginalParameter)
     {
         foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
             if ($singleUserDefinedInput->isFitAnyParameter($orginalParameter)) {

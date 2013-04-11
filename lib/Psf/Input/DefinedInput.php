@@ -6,7 +6,6 @@
  */
 namespace Psf\Input;
 
-
 class DefinedInput
 {
     const VALUE_NONE = 1;
