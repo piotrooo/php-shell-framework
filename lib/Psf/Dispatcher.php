@@ -28,15 +28,15 @@ class Dispatcher
         $parsedArgv = $this->getParseInputArgv();
 
         foreach ($parsedArgv as $applicationName => $applicationParameters) {
-            $this->_callAplication($applicationName, $applicationParameters);
+            $this->_callApplication($applicationName, $applicationParameters);
         }
     }
 
-    private function _callAplication($applicationName, $applicationParameters)
+    private function _callApplication($applicationName, $applicationParameters)
     {
-        $preparedAplicationName = '\Console\\' . ucfirst($applicationName) . 'Shell';
+        $preparedApplicationName = '\Console\\' . ucfirst($applicationName) . 'Shell';
 
-        $application = new $preparedAplicationName($applicationName, $applicationParameters);
+        $application = new $preparedApplicationName($applicationName, $applicationParameters);
         $application->configure();
         $application->main();
     }
