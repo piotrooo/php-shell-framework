@@ -1,11 +1,11 @@
 {
-    "name": "vendor_name/package_name",
-    "description": "description_text",
+    "name": "piotrooo/php-shell-framework",
+    "description": "PHP Shell Framework - creating shell applications",
     "minimum-stability": "dev",
     "authors": [
         {
-            "name": "author's name",
-            "email": "email@example.com"
+            "name": "Piotr Olaszewski",
+            "email": "piotroo89@gmail.com"
         }
     ],
     "require": {

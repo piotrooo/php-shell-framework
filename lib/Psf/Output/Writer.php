@@ -18,6 +18,8 @@ class Writer
 
     private $_streamHandle;
     private $_formatters = array();
+    private $_currentVerbosity = self::VERBOSITY_NORMAL;
+    private $_applicationVerbosity = self::VERBOSITY_NORMAL;
 
     public function __construct($stream = self::STREAM_STDOUT)
     {
@@ -31,11 +33,25 @@ class Writer
 
     public function writeMessage($message, $numberOfNewLines = 1)
     {
+        if ($this->_checkVerbosityCanNotWrite()) {
+            return false;
+        }
+
         $messageWithNewLines = $message . str_repeat(PHP_EOL, $numberOfNewLines);
 
         $parsedMessage = $this->_parseMessage($messageWithNewLines);
 
         fwrite($this->_streamHandle, $parsedMessage);
+    }
+
+    private function _checkVerbosityCanNotWrite()
+    {
+        return !$this->_checkVerbosityCanWrite();
+    }
+
+    private function _checkVerbosityCanWrite()
+    {
+        return $this->_currentVerbosity <= $this->_applicationVerbosity;
     }
 
     private function _parseMessage($message)
@@ -52,6 +68,16 @@ class Writer
         }
 
         return $formatMessage;
+    }
+
+    public function setVerbosityForOutput($verbosity)
+    {
+        $this->_currentVerbosity = $verbosity;
+    }
+
+    public function setApplicationVerbosity($verbosity)
+    {
+        $this->_applicationVerbosity = $verbosity;
     }
 
     public function __destruct()

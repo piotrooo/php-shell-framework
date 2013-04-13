@@ -29,11 +29,35 @@ class Shell
         $this->_stdout = new Writer(Writer::STREAM_STDOUT);
         $this->_stderr = new Writer(Writer::STREAM_STDERR);
 
+        $this->_setOutputSystemVerbosity();
+
         $this->_stdin = new Reader(Reader::STREAM_READ);
+    }
+
+    private function _setOutputSystemVerbosity()
+    {
+        if ($this->_isVerboseSet()) {
+            $this->_stdout->setApplicationVerbosity(Writer::VERBOSITY_VERBOSE);
+        } else if ($this->_isQuietSet()) {
+            $this->_stdout->setApplicationVerbosity(Writer::VERBOSITY_QUIET);
+        } else {
+            $this->_stdout->setApplicationVerbosity(Writer::VERBOSITY_NORMAL);
+        }
+    }
+
+    private function _isVerboseSet()
+    {
+        return array_key_exists('verbose', $this->parsedArgv);
+    }
+
+    private function _isQuietSet()
+    {
+        return array_key_exists('quiet', $this->parsedArgv);
     }
 
     public function out($message, $numberOfNewLines = 1, $verbosityLevel = Writer::VERBOSITY_NORMAL)
     {
+        $this->_stdout->setVerbosityForOutput($verbosityLevel);
         $this->_stdout->writeMessage($message, $numberOfNewLines, $verbosityLevel);
     }
 
@@ -68,10 +92,10 @@ class Shell
     {
         $returnValue = null;
 
-        if($this->_isParameterFitUserDefined($parameterName)){
+        if ($this->_isParameterFitUserDefined($parameterName)) {
             $evaluateParameter = $this->_fitParameterName($parameterName);
 
-            $returnValue = $this->parsedArgv[$parameterName] ?: $this->parsedArgv[$evaluateParameter];
+            $returnValue = $this->parsedArgv[$parameterName] ? : $this->parsedArgv[$evaluateParameter];
         }
 
         if ($returnValue === null) {

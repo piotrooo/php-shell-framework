@@ -9,15 +9,13 @@ namespace Console;
 use Psf\Input\DefinedInputException;
 use Psf\Interfaces\ShellApplicationInterface;
 use Psf\Output\StyleFormatter;
+use Psf\Output\Writer;
 use Psf\Shell;
 
 class HelloShell extends Shell implements ShellApplicationInterface
 {
     public function configure()
     {
-        $this
-            ->addParameter('N', 'name')
-            ->addParameter('u', 'user');
     }
 
     public function main()
@@ -29,10 +27,9 @@ class HelloShell extends Shell implements ShellApplicationInterface
 
         $this->out("<special>Hello</special> <special2> World </special2> <special>Today</special>!!!");
 
-        $name = $this->_getParameterWrapper('N');
-        if (isset($name)) {
-            $this->out($name);
-        }
+        $this->out('This message is in normal verbosity');
+        $this->out('This message is in quiet verbosity', 1, Writer::VERBOSITY_QUIET);
+        $this->out('This message is in verbose verbosity', 1, Writer::VERBOSITY_VERBOSE);
 
         $this->out("Type how old are you: ", 0);
         $age = $this->read();
