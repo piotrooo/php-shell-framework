@@ -3,7 +3,7 @@ PHP Shell Framework by Piotr Olaszewski
 
 This framework can be used to creating fully shell scripts.
 
-## Creating new application
+Creating new application
 -------------------------------
 To create new application, you must create a new PHP file to __app/Console__ location, name of this should be __*<YourApplicationName>*Shell.php__.
 
