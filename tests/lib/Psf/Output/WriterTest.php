@@ -2,10 +2,11 @@
 class WriterTest extends PHPUnit_Framework_TestCase
 {
     private $_writer;
+    private $_handlerStream;
 
     public function tearDown()
     {
-        fclose($this->_writer);
+        fclose($this->_handlerStream);
     }
 
     private function _openWriteStdOut()
@@ -16,15 +17,15 @@ class WriterTest extends PHPUnit_Framework_TestCase
     private function _getActualWriteMessage($message, $numberOfNewLines = 1)
     {
         $streamProp = new ReflectionProperty($this->_writer, '_streamHandle');
-        $streamRead = fopen('php://memory', 'rw');
+        $this->_handlerStream = fopen('php://memory', 'rw');
 
         $streamProp->setAccessible(true);
-        $streamProp->setValue($this->_writer, $streamRead);
+        $streamProp->setValue($this->_writer, $this->_handlerStream);
 
         $this->_writer->writeMessage($message, $numberOfNewLines);
-        fseek($streamRead, 0);
-        $actual = stream_get_contents($streamRead);
-        fclose($streamRead);
+        fseek($this->_handlerStream, 0);
+        $actual = stream_get_contents($this->_handlerStream);
+
         return $actual;
     }
 

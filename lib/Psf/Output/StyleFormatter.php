@@ -67,29 +67,29 @@ class StyleFormatter
 
     private function _replaceTagColors($text)
     {
-        $colors = $this->_getBgColorCode($this->_bgColor) . ';' . $this->_getFgColorCode($this->_fgColor);
-        $effects = $this->_getParsedToStringEffects();
+        $colors = $this->getBgColorCode() . ';' . $this->getFgColorCode();
+        $effects = $this->getParsedToStringEffects();
         $effectsCodeString = $effects ? ';' . $effects : '';
 
         return sprintf("\033[%sm%s\033[0m", $colors . $effectsCodeString, $text);
     }
 
-    private function _getFgColorCode($color)
+    public function getFgColorCode()
     {
-        return self::$fgColors[$color];
+        return isset(self::$fgColors[$this->_fgColor]) ? self::$fgColors[$this->_fgColor] : '';
     }
 
-    private function _getBgColorCode($color)
+    public function getBgColorCode()
     {
-        return self::$bgColors[$color];
+        return self::$bgColors[$this->_bgColor];
     }
 
-    private function _getParsedToStringEffects()
+    public function getParsedToStringEffects()
     {
         $effectCodeList = array();
         if (!empty($this->_effects)) {
             foreach ($this->_effects as $effectName) {
-                $effectCodeList[] = $this->_getEffectCode($effectName);
+                $effectCodeList[] = $this->getEffectCode($effectName);
             }
         }
 
@@ -98,7 +98,7 @@ class StyleFormatter
         return $effectString;
     }
 
-    private function _getEffectCode($effect)
+    public function getEffectCode($effect)
     {
         return self::$effects[$effect];
     }
