@@ -48,7 +48,7 @@ Constraint `app` determines which application should be called. After this call,
     
 Application can accept short and long types of parameters.
 
-Framework implements this approach:
+PHP Shell Framework implements this approach:
 
 [http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html](http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html)
 
@@ -173,7 +173,7 @@ output:
 Styling output
 --------------
 
-Styling output is done by user-defined tags - like XML. Style formetter will replace XML tag to correct defined ANSI code sequence.
+Styling output is done by user-defined tags - like XML. PHP Shell Framework using style formetter will replace XML tag to correct defined ANSI code sequence.
 
 To declare new XML tag and corresonding with him ANSI code you do:
 
