@@ -61,3 +61,85 @@ Possible combinations:
 * `-nhello` *short parameter with argument, no space separed, return hello*
 * `--user` *long parameter without argument, return true*
 * `--user=Piotr` *long parameter with argument, equal sign separed, return Piotr*
+
+To add support to parameters in application in method `configure`, we must set parameters of each parameter.
+
+```php
+public function configure()
+{
+    $this
+        ->addParameter('N', 'namespace')
+        ->addParameter('u', 'user');
+}
+```
+
+This configuration allows us to many possibilities call our parameters.
+
+This call:
+
+    $ php psf.php app:hello -N php/\shell/\output
+
+is corresponding to:
+
+    $ php psf.php app:hello --namespace php/\shell/\output
+
+In `main` method we get parameter like this:
+
+    $namespace = $this->getParameterValue('namespace');
+
+this getter working on `-N` and `--namespace` parameter equally.
+
+__Special case.__ If we call application like that:
+
+    $ php psf.php app:hello -N php/\shell/\output --namespace php/\formatter
+    
+The `getParameterValue` method will return `php/formatter`.
+
+Styling output
+--------------
+
+Styling output is done by user-defined tags - like XML. Style formetter will replace XML tag to correct defined ANSI code sequence.
+
+To declare new XML tag and corresonding with him ANSI code you do:
+
+```php
+$styleFormat = new StyleFormatter('gray', 'magenta', array('blink', 'underline'));
+$this->setFormatter('special', $styleFormat);
+```
+
+This would you to allow `<special>` tag in you output messages:
+
+```php
+$this->out("<special>Hello</special> orld <special>Today</special>!!!");
+```
+
+You can use following color for text attributes:
+
+* black
+* red
+* green
+* brown
+* blue
+* magenta
+* cyan
+* gray
+
+For background color use:
+
+* black
+* red
+* green
+* brown
+* blue
+* magenta
+* cyan
+* white
+
+Also you can use following effects:
+
+* defaults
+* bold
+* underline
+* blink
+* reverse
+* conceal
