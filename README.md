@@ -95,6 +95,81 @@ __Special case.__ If we call application like that:
     
 The `getParameterValue` method will return `php/formatter`.
 
+Output
+------
+
+When you want display someting on `STDOUT` you can use `out` method:
+
+```php
+$this->out("Hello World Today!!!");
+```
+
+print:
+
+```
+Hello World Today!!!
+```
+
+You can aslo defined how many new lines should be after output message:
+
+```php
+$this->out("Hello World Today!!!", 5);
+```
+
+print:
+
+```
+Hello World Today!!!
+
+
+
+
+```
+### Console output levels
+
+Sometimes you need different levels of verbosity. PHP Shell Framework provide three levels:
+
+1. QUIET
+2. NORMAL
+3. VERBOSE
+
+Default all outputs working in `NORMAL` level. If you want change level you must define this in `out` method.
+
+__Example:__
+
+```php
+$this->out('This message is in normal verbosity');
+$this->out('This message is in quiet verbosity', 1, Writer::VERBOSITY_QUIET);
+$this->out('This message is in verbose verbosity', 1, Writer::VERBOSITY_VERBOSE);
+```
+
+If you want run application in `NORMAL` level:
+
+    $ php psf.php app:hello
+
+output:
+
+    This message is in normal verbosity
+    This message is in quiet verbosity
+
+If you want run application in `QUIET` level:
+
+    $ php psf.php app:hello --quiet
+
+output:
+
+    This message is in quiet verbosity
+    
+If you want run application in `VERBOSE` level:
+
+    $ php psf.php app:hello --verbose
+    
+output:
+
+    This message is in normal verbosity
+    This message is in quiet verbosity
+    This message is in verbose verbosity
+
 Styling output
 --------------
 
