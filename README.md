@@ -182,7 +182,7 @@ $styleFormat = new StyleFormatter('gray', 'magenta', array('blink', 'underline')
 $this->setFormatter('special', $styleFormat);
 ```
 
-This would you to allow `<special>` tag in you output messages:
+This would you to allow `<special>` tag in you output messages and will set text color to `gray`, background color to `magenta` and have two effects - `blink` and `underline`.
 
 ```php
 $this->out("<special>Hello</special> orld <special>Today</special>!!!");
@@ -218,3 +218,20 @@ Also you can use following effects:
 * blink
 * reverse
 * conceal
+
+Reading
+-------
+
+Method `read` reads and interprest characters from `STDIN`, which usually recives what the user type at the keyboard.
+
+Usage of `read`:
+
+```php
+$this->out("Type how old are you: ", 0);
+$age = $this->read();
+if (!empty($age)) {
+    $this->out('You have ' . $age . ' years old - nice!');
+}
+```
+
+This piece of code wait unit user type something on keyboard.
