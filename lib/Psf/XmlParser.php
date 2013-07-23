@@ -11,7 +11,6 @@ class XmlParser
     public static function parseTags($stringToParse)
     {
         preg_match_all('#<([\w-]*?)>#', $stringToParse, $tagsMatched);
-
         return $tagsMatched[1];
     }
 
@@ -19,7 +18,6 @@ class XmlParser
     {
         $regexp = '#<' . $tag . '>(.+?)</' . $tag . '>#';
         preg_match_all($regexp, $stringToParse, $valuesMatched);
-
         return $valuesMatched[1];
     }
 }

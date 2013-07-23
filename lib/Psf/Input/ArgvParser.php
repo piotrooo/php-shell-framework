@@ -1,6 +1,6 @@
 <?php
 /**
- * ArgvInput - class to parse argv input values
+ * ArgvParser
  *
  * @author Piotr Olaszewski
  *
@@ -31,7 +31,6 @@ class ArgvParser
         foreach ($this->_userPassedParams as $singleParameter) {
             $this->_detectParameterType($singleParameter);
         }
-
         return $this;
     }
 
@@ -64,7 +63,6 @@ class ArgvParser
         if (preg_match('/^-{1,1}([^-])([^=].*)/', $parameter, $groupParameter)) {
             return array('parameter' => $groupParameter[1], 'value' => $groupParameter[2]);
         }
-
         return array();
     }
 
@@ -72,7 +70,6 @@ class ArgvParser
     {
         if (strpos($parameter, '=')) {
             $parameterParts = explode('=', $parameter);
-
             return array('parameter' => $parameterParts[0], 'value' => $parameterParts[1]);
         } else {
             return array('parameter' => $parameter, 'value' => '');

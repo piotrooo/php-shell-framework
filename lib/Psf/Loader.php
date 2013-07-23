@@ -25,7 +25,6 @@ class Loader
     public function loadClass($loadClassName)
     {
         $classPath = $this->_getPathFromClassName($loadClassName);
-
         try {
             $this->tryIncludeClass($classPath);
         } catch (LoaderException $e) {
@@ -46,15 +45,13 @@ class Loader
 
     private function _includeFromClassPath($classPath)
     {
-        foreach ($this->_includePath as $registredPath) {
-            $filename = ROOT_PATH . $registredPath . $classPath . '.php';
-
+        foreach ($this->_includePath as $registeredPath) {
+            $filename = ROOT_PATH . $registeredPath . $classPath . '.php';
             if (file_exists($filename)) {
                 /** @noinspection PhpIncludeInspection */
                 return require_once($filename);
             }
         }
-
         throw new LoaderException("Couldn't load class file - non path found [$classPath]");
     }
 }

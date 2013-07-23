@@ -66,7 +66,7 @@ class ArgvParserTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldParseShortParametersWithValueNonSpaceSepared ()
+    public function shouldParseShortParametersWithValueNonSpaceSepared()
     {
         //given
         $this->_mockedArgvParser->parseParameters();
@@ -82,7 +82,7 @@ class ArgvParserTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldParseShortParametersWithValueEqualSignSepared ()
+    public function shouldParseShortParametersWithValueEqualSignSepared()
     {
         //given
         $this->_mockedArgvParser->parseParameters();

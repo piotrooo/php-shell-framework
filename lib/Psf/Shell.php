@@ -73,35 +73,27 @@ class Shell
 
     public function read()
     {
-        $readValue = $this->_stdin->getReadedValue();
-
-        return $readValue;
+        return $this->_stdin->getReadedValue();
     }
 
     public function addParameter($shortName, $longName)
     {
         $definedInput = new DefinedInput($this->_applicationName);
         $definedInput->addParameter($shortName, $longName);
-
         $this->_userDefinedInput[] = $definedInput;
-
         return $this;
     }
 
     public function getParameterValue($parameterName)
     {
         $returnValue = null;
-
         if ($this->_isParameterFitUserDefined($parameterName)) {
             $evaluateParameter = $this->_fitParameterName($parameterName);
-
             $returnValue = $this->parsedArgv[$parameterName] ? : $this->parsedArgv[$evaluateParameter];
         }
-
         if ($returnValue === null) {
             throw new DefinedInputException("No defined parameter");
         }
-
         return $returnValue;
     }
 
@@ -109,11 +101,9 @@ class Shell
     {
         foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
             if ($singleUserDefinedInput->isFitAnyParameter($parameterName)) {
-
                 return true;
             }
         }
-
         return false;
     }
 

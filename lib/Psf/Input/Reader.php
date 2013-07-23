@@ -6,7 +6,7 @@
  */
 namespace Psf\Input;
 
-class Reader 
+class Reader
 {
     const STREAM_READ = 'php://stdin';
 
@@ -19,9 +19,7 @@ class Reader
 
     public function getReadedValue()
     {
-        $value = trim(fgets($this->_streamHandle));
-
-        return $value;
+        return trim(fgets($this->_streamHandle));
     }
 
     public function __destruct()

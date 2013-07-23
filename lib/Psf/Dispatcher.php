@@ -26,7 +26,6 @@ class Dispatcher
     public function dispatch()
     {
         $parsedArgv = $this->getParseInputArgv();
-
         foreach ($parsedArgv as $applicationName => $applicationParameters) {
             $this->_callApplication($applicationName, $applicationParameters);
         }
@@ -35,7 +34,6 @@ class Dispatcher
     private function _callApplication($applicationName, $applicationParameters)
     {
         $preparedApplicationName = '\Console\\' . ucfirst($applicationName) . 'Shell';
-
         $application = new $preparedApplicationName($applicationName, $applicationParameters);
         $application->configure();
         $application->main();
@@ -44,10 +42,8 @@ class Dispatcher
     public function getParseInputArgv(array $argv = array())
     {
         $paramsToParse = (!empty($argv) ? $argv : $this->_userPassedArgv);
-
         $argvParsed = new ArgvParser($paramsToParse);
         $argvParsed->parseParameters();
-
         return $argvParsed->getParsedParameters();
     }
 }

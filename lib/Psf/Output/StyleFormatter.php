@@ -54,14 +54,12 @@ class StyleFormatter
     {
         $values = XmlParser::getValueBetweenTags($xmlTag, $message);
         $buildNewMessage = $message;
-
         foreach ($values as $val) {
             $valueReplaced = '<' . $xmlTag . '>' . $val . '</' . $xmlTag . '>';
             $valueResult = $this->_replaceTagColors($val);
 
             $buildNewMessage = str_replace($valueReplaced, $valueResult, $buildNewMessage);
         }
-
         return $buildNewMessage;
     }
 
@@ -70,7 +68,6 @@ class StyleFormatter
         $colors = $this->getBgColorCode() . ';' . $this->getFgColorCode();
         $effects = $this->getParsedToStringEffects();
         $effectsCodeString = $effects ? ';' . $effects : '';
-
         return sprintf("\033[%sm%s\033[0m", $colors . $effectsCodeString, $text);
     }
 
@@ -92,9 +89,7 @@ class StyleFormatter
                 $effectCodeList[] = $this->getEffectCode($effectName);
             }
         }
-
         $effectString = implode(';', $effectCodeList);
-
         return $effectString;
     }
 

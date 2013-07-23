@@ -37,7 +37,6 @@ class DefinedInput
             }
                 break;
         }
-
         return false;
     }
 

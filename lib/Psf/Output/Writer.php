@@ -1,6 +1,6 @@
 <?php
 /**
- * ShellWriter
+ * Writer
  *
  * @author Piotr Olaszewski
  */
@@ -36,11 +36,8 @@ class Writer
         if ($this->_checkVerbosityCanNotWrite()) {
             return false;
         }
-
         $messageWithNewLines = $message . str_repeat(PHP_EOL, $numberOfNewLines);
-
         $parsedMessage = $this->_parseMessage($messageWithNewLines);
-
         fwrite($this->_streamHandle, $parsedMessage);
     }
 
@@ -58,7 +55,6 @@ class Writer
     {
         $parsedTags = array_unique(XmlParser::parseTags($message));
         $formatMessage = $message;
-
         foreach ($parsedTags as $xmlTag) {
             if (!empty($this->_formatters[$xmlTag])) {
                 $formatter = $this->_formatters[$xmlTag];
@@ -66,7 +62,6 @@ class Writer
                 $formatMessage = $formatter->render($xmlTag, $formatMessage);
             }
         }
-
         return $formatMessage;
     }
 
