@@ -1,14 +1,13 @@
 <?php
 /**
- * ShellApplicationInterface
+ * ApplicationInterface
  *
  * @author Piotr Olaszewski
  */
 namespace Psf\Interfaces;
 
-interface ShellApplicationInterface
+interface ApplicationInterface
 {
     public function configure();
-
     public function main();
 }

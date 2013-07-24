@@ -6,6 +6,7 @@
  */
 namespace Psf;
 
+use Psf\Helpers\Helper;
 use Psf\Input\DefinedInput;
 use Psf\Input\DefinedInputException;
 use Psf\Input\Reader;
@@ -20,7 +21,6 @@ class Shell
     private $_stdin;
     private $_userDefinedInput = array();
     private $_applicationName;
-
     public function __construct($applicationName, $parsedArgv)
     {
         $this->_applicationName = $applicationName;
@@ -32,6 +32,14 @@ class Shell
         $this->_setOutputSystemVerbosity();
 
         $this->_stdin = new Reader(Reader::STREAM_READ);
+    }
+
+    /**
+     * @return \Psf\Output\Writer
+     */
+    public function getStdout()
+    {
+        return $this->_stdout;
     }
 
     private function _setOutputSystemVerbosity()
@@ -107,12 +115,17 @@ class Shell
         return false;
     }
 
-    private function _fitParameterName($orginalParameter)
+    private function _fitParameterName($originalParameter)
     {
         foreach ($this->_userDefinedInput as $singleUserDefinedInput) {
-            if ($singleUserDefinedInput->isFitAnyParameter($orginalParameter)) {
-                return $singleUserDefinedInput->getOppositeParameter($orginalParameter);
+            if ($singleUserDefinedInput->isFitAnyParameter($originalParameter)) {
+                return $singleUserDefinedInput->getOppositeParameter($originalParameter);
             }
         }
+    }
+
+    public function getHelper($helperName)
+    {
+        return Helper::loadHelper($helperName);
     }
 }

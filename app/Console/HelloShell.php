@@ -2,17 +2,16 @@
 /**
  * HelloShell
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Console;
 
-use Psf\Input\DefinedInputException;
-use Psf\Interfaces\ShellApplicationInterface;
+use Psf\Interfaces\ApplicationInterface;
 use Psf\Output\StyleFormatter;
 use Psf\Output\Writer;
 use Psf\Shell;
 
-class HelloShell extends Shell implements ShellApplicationInterface
+class HelloShell extends Shell implements ApplicationInterface
 {
     public function configure()
     {
@@ -37,16 +36,6 @@ class HelloShell extends Shell implements ShellApplicationInterface
             $styleFormat = new StyleFormatter('red', 'white');
             $this->setFormatter('info', $styleFormat);
             $this->out('You have <info>' . $age . '</info> years old - nice!');
-        }
-    }
-
-    private function _getParameterWrapper($parameterName)
-    {
-        try {
-            return $this->getParameterValue($parameterName);
-        } catch (DefinedInputException $e) {
-            $this->err($e->getMessage());
-            return false;
         }
     }
 }

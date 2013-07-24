@@ -3,7 +3,7 @@
 use Psf\Dispatcher;
 use Psf\Loader;
 
-error_reporting(0);
+error_reporting(E_ALL);
 define('ROOT_PATH', realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR);
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Psf' . DIRECTORY_SEPARATOR . 'Loader.php';
