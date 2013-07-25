@@ -11,6 +11,7 @@ use Psf\Output\Writer;
 
 class Table implements HelperInterface
 {
+    private $_sampleRow = array();
     private $_headers = array();
     private $_rows = array();
     /**
@@ -39,19 +40,27 @@ class Table implements HelperInterface
     public function render(Writer $output)
     {
         $this->_output = $output;
+        $this->_sampleRow = empty($this->_headers) ? (current($this->_rows) ? : array()) : $this->_headers;
 
-        $this->_renderHeaderRowSeparator();
+        if (!empty($this->_headers)) {
+            $this->_renderRowSeparator();
+        }
         $this->_generateHeaderRow();
-        $this->_renderHeaderRowSeparator();
+        $this->_renderRowSeparator();
 
         $this->_generateBodyRows();
-        $this->_renderHeaderRowSeparator();
+        if (!empty($this->_rows)) {
+            $this->_renderRowSeparator();
+        }
     }
 
-    private function _renderHeaderRowSeparator()
+    private function _renderRowSeparator()
     {
+        if (empty($this->_sampleRow)) {
+            return;
+        }
         $separator = '+';
-        foreach ($this->_headers as $column => $header) {
+        foreach ($this->_sampleRow as $column => $header) {
             $columnWidth = $this->_getColumnWidth($column);
             $separator .= str_repeat('-', $columnWidth) . '+';
         }
@@ -72,6 +81,9 @@ class Table implements HelperInterface
 
     private function _renderDataRow($row)
     {
+        if (empty($row)) {
+            return;
+        }
         $line = '|';
         foreach ($row as $column => $name) {
             $columnWidth = $this->_getColumnWidth($column);
