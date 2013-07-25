@@ -25,8 +25,8 @@ class TableShell extends Shell implements ApplicationInterface
                 array('2', 'Brad', 'Pitt'),
                 array('3', 'Denzel', 'Washington'),
                 array('4', 'Angelina', 'Jolie')
-            ));
-
+            ))
+        ;
         $table->render($this->getStdout());
     }
 }
