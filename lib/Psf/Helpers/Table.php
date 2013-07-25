@@ -26,7 +26,13 @@ class Table implements HelperInterface
 
     public function setRows(array $rows)
     {
-        $this->_rows = $rows;
+        $this->_rows = array_merge($this->_rows, $rows);
+        return $this;
+    }
+
+    public function addRow(array $row)
+    {
+        $this->_rows[] = $row;
         return $this;
     }
 
