@@ -235,3 +235,37 @@ if (!empty($age)) {
 ```
 
 This piece of code wait unit user type something on keyboard.
+
+Helpers
+-------
+
+In framework we can use helpers to generate some views.
+
+### Table
+Table is simple helper which generate tabular data.
+
+Usage of `table`:
+
+```php
+$table = $this->getHelper('Table');
+$table
+    ->setHeaders(array('ID', 'Name', 'Surname'))
+    ->setRows(array(
+        array('1', 'John', 'Smith'),
+        array('2', 'Brad', 'Pitt'),
+        array('3', 'Denzel', 'Washington'),
+        array('4', 'Angelina', 'Jolie')
+    ));
+$table->render($this->getStdout());
+```
+
+will generate:
+
+    +----+----------+------------+
+    | ID | Name     | Surname    |
+    +----+----------+------------+
+    | 1  | John     | Smith      |
+    | 2  | Brad     | Pitt       |
+    | 3  | Denzel   | Washington |
+    | 4  | Angelina | Jolie      |
+    +----+----------+------------+
