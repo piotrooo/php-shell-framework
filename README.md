@@ -269,3 +269,21 @@ will generate:
     | 3  | Denzel   | Washington |
     | 4  | Angelina | Jolie      |
     +----+----------+------------+
+
+Additionaly we can add single row to our table by using `addRow` method:
+
+```php
+$table->addRow(array('5', 'Peter', 'Nosurname'));
+```
+
+will produce:
+
+    +----+----------+------------+
+    | ID | Name     | Surname    |
+    +----+----------+------------+
+    | 1  | John     | Smith      |
+    | 2  | Brad     | Pitt       |
+    | 3  | Denzel   | Washington |
+    | 4  | Angelina | Jolie      |
+    | 5  | Peter    | Nosurname  |
+    +----+----------+------------+
