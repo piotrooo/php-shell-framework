@@ -1,6 +1,6 @@
 <?php
 /**
- * TableHelper
+ * Table
  *
  * @author Piotr Olaszewski
  */
@@ -11,86 +11,86 @@ use Psf\Output\Writer;
 
 class Table implements HelperInterface
 {
-    private $headers = array();
-    private $rows = array();
+    private $_headers = array();
+    private $_rows = array();
     /**
      * @var Writer
      */
-    private $output;
+    private $_output;
 
     public function setHeaders(array $headers)
     {
-        $this->headers = $headers;
+        $this->_headers = $headers;
         return $this;
     }
 
     public function setRows(array $rows)
     {
-        $this->rows = $rows;
+        $this->_rows = $rows;
         return $this;
     }
 
     public function render(Writer $output)
     {
-        $this->output = $output;
+        $this->_output = $output;
 
-        $this->renderHeaderRowSeparator();
-        $this->generateHeaderRow();
-        $this->renderHeaderRowSeparator();
+        $this->_renderHeaderRowSeparator();
+        $this->_generateHeaderRow();
+        $this->_renderHeaderRowSeparator();
 
-        $this->generateBodyRows();
-        $this->renderHeaderRowSeparator();
+        $this->_generateBodyRows();
+        $this->_renderHeaderRowSeparator();
     }
 
-    private function renderHeaderRowSeparator()
+    private function _renderHeaderRowSeparator()
     {
         $separator = '+';
-        foreach ($this->headers as $column => $header) {
-            $columnWidth = $this->getColumnWidth($column);
+        foreach ($this->_headers as $column => $header) {
+            $columnWidth = $this->_getColumnWidth($column);
             $separator .= str_repeat('-', $columnWidth) . '+';
         }
-        $this->output->writeMessage($separator);
+        $this->_output->writeMessage($separator);
     }
 
-    private function generateHeaderRow()
+    private function _generateHeaderRow()
     {
-        $this->renderDataRow($this->headers);
+        $this->_renderDataRow($this->_headers);
     }
 
-    private function generateBodyRows()
+    private function _generateBodyRows()
     {
-        foreach ($this->rows as $row) {
-            $this->renderDataRow($row);
+        foreach ($this->_rows as $row) {
+            $this->_renderDataRow($row);
         }
     }
 
-    private function renderDataRow($row)
+    private function _renderDataRow($row)
     {
         $line = '|';
         foreach ($row as $column => $name) {
-            $columnWidth = $this->getColumnWidth($column);
+            $columnWidth = $this->_getColumnWidth($column);
             $spaces = $columnWidth - strlen($name) - 1;
             $line .= ' ' . $name . str_repeat(' ', $spaces) . '|';
         }
-        $this->output->writeMessage($line);
+        $this->_output->writeMessage($line);
     }
 
-    private function getColumnWidth($column)
+    private function _getColumnWidth($column)
     {
         $width = 0;
-        if (isset($this->headers[$column])) {
-            $width = strlen($this->headers[$column]);
+        if (isset($this->_headers[$column])) {
+            $width = strlen($this->_headers[$column]);
         }
         array_map(function ($element) use (&$width, $column) {
             $length = strlen($element[$column]);
             if ($length > $width) {
                 $width = $length;
             }
-        }, $this->rows);
-        return $this->widthWithSpaces($width);
+        }, $this->_rows);
+        return $this->_widthWithSpaces($width);
     }
 
-    private function widthWithSpaces($width)
+    private function _widthWithSpaces($width)
     {
         return $width + 2;
     }

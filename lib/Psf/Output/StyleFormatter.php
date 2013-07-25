@@ -2,7 +2,7 @@
 /**
  * StyleFormatter
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Psf\Output;
 

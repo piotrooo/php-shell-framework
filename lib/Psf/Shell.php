@@ -16,11 +16,24 @@ use Psf\Output\Writer;
 class Shell
 {
     public $parsedArgv;
+    /**
+     * @var Writer
+     */
     private $_stdout;
+    /**
+     * @var Writer
+     */
     private $_stderr;
+    /**
+     * @var Reader
+     */
     private $_stdin;
+    /**
+     * @var DefinedInput[]
+     */
     private $_userDefinedInput = array();
     private $_applicationName;
+
     public function __construct($applicationName, $parsedArgv)
     {
         $this->_applicationName = $applicationName;

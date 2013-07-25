@@ -2,7 +2,7 @@
 /**
  * Reader
  *
- * @author Piotrooo
+ * @author Piotr Olaszewski
  */
 namespace Psf\Input;
 
