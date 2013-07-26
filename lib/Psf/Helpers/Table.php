@@ -11,13 +11,13 @@ use Psf\Output\Writer;
 
 class Table implements HelperInterface
 {
-    private $_sampleRow = array();
-    private $_headers = array();
-    private $_rows = array();
     /**
      * @var Writer
      */
     private $_output;
+    private $_sampleRow = array();
+    private $_headers = array();
+    private $_rows = array();
 
     public function setHeaders(array $headers)
     {
