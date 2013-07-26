@@ -1,6 +1,7 @@
 {
     "name": "piotrooo/php-shell-framework",
     "description": "PHP Shell Framework - creating shell applications",
+    "keywords": ["php", "shell", "framework", "console", "bash"],
     "minimum-stability": "dev",
     "authors": [
         {
@@ -11,5 +12,13 @@
     "require": {
         "phpunit/phpunit": "3.7.19",
         "mikey179/vfsStream": "1.0.0-beta4"
+    },
+    "bin": [
+        "psf.php"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Psf\\": "lib/"
+        }
     }
 }
