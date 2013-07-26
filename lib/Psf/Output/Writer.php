@@ -15,6 +15,8 @@ class Writer
     const VERBOSITY_QUIET = 0;
     const VERBOSITY_NORMAL = 1;
     const VERBOSITY_VERBOSE = 2;
+    const LF = PHP_EOL;
+    const CR = "\r";
 
     private $_streamHandle;
     private $_formatters = array();
@@ -31,12 +33,12 @@ class Writer
         $this->_formatters[$xmlTag] = $formatter;
     }
 
-    public function writeMessage($message, $numberOfNewLines = 1)
+    public function writeMessage($message, $numberOfNewLines = 1, $eol = self::LF)
     {
         if ($this->_checkVerbosityCanNotWrite()) {
             return false;
         }
-        $messageWithNewLines = $message . str_repeat(PHP_EOL, $numberOfNewLines);
+        $messageWithNewLines = $message . str_repeat($eol, $numberOfNewLines);
         $parsedMessage = $this->_parseMessage($messageWithNewLines);
         fwrite($this->_streamHandle, $parsedMessage);
     }
