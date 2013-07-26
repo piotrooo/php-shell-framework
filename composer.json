@@ -9,7 +9,7 @@
             "email": "piotroo89@gmail.com"
         }
     ],
-    "require": {
+    "require-dev": {
         "phpunit/phpunit": "3.7.19",
         "mikey179/vfsStream": "1.0.0-beta4"
     },
