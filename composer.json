@@ -15,10 +15,5 @@
     },
     "bin": [
         "psf.php"
-    ],
-    "autoload": {
-        "psr-0": {
-            "Psf\\": "lib/"
-        }
-    }
+    ]
 }

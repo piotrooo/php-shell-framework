@@ -12,7 +12,11 @@ class Loader
 
     public function setIncludePath($path)
     {
-        $this->_includePath[] = $path;
+        if (is_array($path)) {
+            $this->_includePath = array_merge($this->_includePath, $path);
+        } else {
+            $this->_includePath[] = $path;
+        }
         return $this;
     }
 
@@ -46,7 +50,7 @@ class Loader
     private function _includeFromClassPath($classPath)
     {
         foreach ($this->_includePath as $registeredPath) {
-            $filename = ROOT_PATH . $registeredPath . $classPath . '.php';
+            $filename = $registeredPath . $classPath . '.php';
             if (file_exists($filename)) {
                 /** @noinspection PhpIncludeInspection */
                 return require_once($filename);
