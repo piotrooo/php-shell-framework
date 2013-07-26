@@ -3,13 +3,18 @@ PHP Shell Framework
 
 This framework can be used to creating fully shell scripts.
 
+Configuration
+-------------
+* Copy `/path/to/php-shell-framework/config/psf.config.php` to your code base location `/path/to/application/psf.config.php` and set `application_dirs` to corresponding console applications.
+* Inside application dir create catalog `Console` which contains shell apps.
+
 Creating new application
 ------------------------
-To create new application, you must create a new PHP file in __app/Console__ location, name of file this should be __YourApplicationNameShell.php__.
+To create new application, you must create a new PHP file in __your_name_path/Console__ location, name of file this should be __YourApplicationNameShell.php__.
 
 Newly created file should have number of requirements:
 * Name of class inside file should be corresponding name to file.
-* Class should extends from `Shell` and implements `ShellApplicationInterface`.
+* Class should extends from `Shell` and implements `ApplicationInterface`.
 
 So created appliaction should looks like:
 ```php
@@ -19,7 +24,7 @@ namespace Console;
 use Psf\Interfaces\ShellApplicationInterface;
 use Psf\Shell;
 
-class HelloShell extends Shell implements ShellApplicationInterface
+class HelloShell extends Shell implements ApplicationInterface
 {
     public function configure()
     {
