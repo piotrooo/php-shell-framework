@@ -17,6 +17,7 @@ class Writer
     const VERBOSITY_VERBOSE = 2;
     const LF = PHP_EOL;
     const CR = "\r";
+    const ANSI_CLEAR_LINE = "\033[K";
 
     private $_streamHandle;
     private $_formatters = array();
