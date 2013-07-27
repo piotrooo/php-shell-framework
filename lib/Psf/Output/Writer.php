@@ -60,7 +60,6 @@ class Writer
         foreach ($parsedTags as $xmlTag) {
             if (!empty($this->_formatters[$xmlTag])) {
                 $formatter = $this->_formatters[$xmlTag];
-
                 $formatMessage = $formatter->render($xmlTag, $formatMessage);
             }
         }
