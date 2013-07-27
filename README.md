@@ -292,3 +292,33 @@ will produce:
     | 4  | Angelina | Jolie      |
     | 5  | Peter    | Nosurname  |
     +----+----------+------------+
+
+### Progress bar
+This helper provide progress functionality.
+
+Usage of `progress bar`:
+```php
+$progress = $this->getHelper('ProgressBar');
+$progress->initialize($this->getStdout(), 9);
+for ($i = 0; $i < 9; $i++) {
+    $progress->increment();
+    sleep(1);
+}
+```
+
+will produce:
+
+    4/9 (44%) [======================............................]
+    
+### Loader
+Loader helper get possibility of display loader pseudo animation.
+
+Usage of `loader`:
+```php
+$loader = $this->getHelper('Loader');
+$loader->initialize($this->getStdout());
+for ($i = 0; $i < 10; $i++) {
+    $loader->start();
+    sleep(1);
+}
+```
