@@ -322,3 +322,8 @@ for ($i = 0; $i < 10; $i++) {
     sleep(1);
 }
 ```
+
+Also we can customizing loader through setting display char sequence by method `setCharSequence`:
+```php
+$loader->setCharSequence(array('.', '..', '...'));
+```
