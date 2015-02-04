@@ -21,7 +21,7 @@ So created appliaction should looks like:
 <?php
 namespace Console;
 
-use Psf\Interfaces\ShellApplicationInterface;
+use Psf\Interfaces\ApplicationInterface;
 use Psf\Shell;
 
 class HelloShell extends Shell implements ApplicationInterface
