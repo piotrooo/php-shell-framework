@@ -110,7 +110,7 @@ class Shell
         $returnValue = null;
         if ($this->_isParameterFitUserDefined($parameterName)) {
             $evaluateParameter = $this->_fitParameterName($parameterName);
-            $returnValue = $this->parsedArgv[$parameterName] ? : $this->parsedArgv[$evaluateParameter];
+            $returnValue = isset($this->parsedArgv[$parameterName]) && $this->parsedArgv[$parameterName] ? : $this->parsedArgv[$evaluateParameter];
         }
         if ($returnValue === null) {
             throw new DefinedInputException("No defined parameter");
